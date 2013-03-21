@@ -41,8 +41,13 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 	protected void setUp() throws Exception	{	
 	  solo = new Solo(getInstrumentation(), getActivity());		  
 	}	
-
-	public void testWebView() throws ClassNotFoundException
+/*
+ * This test case will load WebView and 
+ * try to login with google test account
+ * load an email details
+ * */
+	
+	public void testActivityHavingWebView() throws ClassNotFoundException
 	{
 		solo.clickOnButton("Webview");
 		solo.assertCurrentActivity("Screen not loaded.", Constants.WEB_VIEW_ACTIVITY);
@@ -86,7 +91,12 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 		solo.sleep(20000);		
 	}
 	
-	public void testCustomHTMLWebView() throws ClassNotFoundException
+	/*
+	 * This test case will load custom HTML WebView and 
+	 * try to fill a registration form
+	 * */
+	
+	public void testActivityHavingCustomHTMLWebView() throws ClassNotFoundException
 	{
 		solo.clickOnButton("Custom HTML");
 		solo.assertCurrentActivity("Screen not loaded.", Constants.CUSTOM_HTML_WEB_VIEW);
@@ -107,7 +117,13 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 		assertTrue("testLoadCustomHTMLWebView Passed", solo.searchText("naveed"));
 	}
 	
-	public void testImageView()
+	
+	/*
+	 * This test case will load screen containing Images & ImageButtons 
+	 * count number of Images & ImageButtons
+	 * click on each ImageButton
+	 * */	
+	public void testActivityHavingImageView()
 	{
 		solo.clickOnButton("Image View");
 		solo.assertCurrentActivity("Screen not loaded.", Constants.IMAGE_VIEW_ACTIVITY_NAME);			
@@ -120,7 +136,12 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 		}
 	}
 	
-	public void testRadioButtons()
+	/*
+	 * This test case will load screen containing RadioButtons 
+	 * count number of RadioButtons
+	 * select only un-selected RadioButtons
+	 * */		
+	public void testActivityHavingRadioButtons()
 	{
 		solo.clickOnButton("Radio Button");
 		solo.assertCurrentActivity("Screen not loaded.",Constants.RADIO_BUTTON_ACTIVITY_NAME);			
@@ -133,8 +154,13 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 			else solo.clickOnRadioButton(i);
 		}
 	}
-
-	public void testCheckBoxes()
+	
+	/*
+	 * This test case will load screen containing CheckBoxes 
+	 * count number of CheckBoxes
+	 * check only un-checked CheckBoxes
+	 * */
+	public void testActivityHavingCheckBoxes()
 	{
 		solo.clickOnButton("Check Box");
 		solo.assertCurrentActivity("Screen not loaded.",Constants.CHECK_BOX_ACTIVITY_NAME);
@@ -148,8 +174,13 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 			else solo.clickOnCheckBox(i);
 		}
 	}
-
-	public void testListView()
+	
+	/*
+	 * This test case will load screen with ListView containing TextViews
+	 * count number of ListViews, visible rows in List, TextViews in List
+	 * select some value from ListView and verify selection
+	 * */
+	public void testActivityHavingListView()
 	{		
 		solo.clickOnButton("ListView");	
 		solo.assertCurrentActivity("Screen not loaded.",Constants.LIST_VIEW_ACTIVITY_NAME);			
@@ -158,8 +189,13 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 		Log.i(Constants.vTag, "Total Visible TextViews in List: "+Global.getNoOfTextViewsInListView());		
 		assertTrue("Problem selecting value from ListView", selectValueFromList("November", solo.getCurrentViews(ListView.class).get(0)));		
 		}
-
-	public void testGridView()
+	
+	/*
+	 * This test case will load screen with GridView containing ImageViews
+	 * count total number of GridViews, ImageView & visible ImageVies 
+	 * click on every second ImageView 
+	 * */
+	public void testActivityHavingGridView()
 	{
 		solo.clickOnButton("GridView");
 		solo.assertCurrentActivity("Screen not loaded.",Constants.GRID_VIEW_ACTIVITY_NAME);
@@ -194,20 +230,33 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 		
 		return Global.vFlag;
 	}
-
-	public void testCalenderView()
+	
+	/*
+	 * This test case will load screen with CalenderView
+	 * it will be implemented soon   
+	 * */
+	public void testActivityHavingCalenderView()
 	{
 		solo.clickOnButton("CalenderView");	
 		//solo.assertCurrentActivity("Screen not loaded.",Constants.CALENDER_VIEW_ACTIVITY_NAME);
 	}
-	
-	public void testDateTimeView()
+
+	/*
+	 * This test case will load screen with DateTimeView
+	 * it will be implemented soon   
+	 * */	
+	public void testActivityHavingDateTimeView()
 	{
 		solo.clickOnButton("DateTimeView");
 		//solo.assertCurrentActivity("Screen not loaded.",Constants.DATE_TIME_VIEW_ACTIVITY_NAME);
 	}
 	
-	public void testTogleButton()
+	/*
+	 * This test case will load screen containing ToggleButtons 
+	 * count number of ToggleButtons
+	 * switch-on ToggleButtons
+	 * */	
+	public void testActivityHavingTogleButton()
 	{
 		solo.clickOnButton("Toggle Button");
 		solo.assertCurrentActivity("Screen not loaded.",Constants.TOGGLE_BUTTON_ACTIVITY_NAME);	
@@ -222,8 +271,13 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 			else Log.i(Constants.vTag, "Button is aleready Switched On.");
 		}
 	}
-
-	public void testButton()
+	
+	/*
+	 * This test case will load screen containing Buttons 
+	 * count number of Buttons
+	 * click on Button
+	 * */	
+	public void testActivityHavingButton()
 	{
 		solo.clickOnButton("Small Button");
 		solo.assertCurrentActivity("Screen not loaded.",Constants.SMALL_BUTTON_ACTIVITY);
@@ -237,26 +291,38 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 		}
 	}
 
-	public void testSpinner()
+	/*
+	 * This test case will load screen containing Spinner 
+	 * count number of Spinners
+	 * select a value and verify selection
+	 * */	
+	public void testActivityHavingSpinner()
 	{
 		solo.clickOnButton("Spinner");
 		solo.assertCurrentActivity("Screen not loaded.",Constants.SPINNER_ACTIVITY_NAME);
 		
 		ArrayList<Spinner> vSpinner = solo.getCurrentViews(Spinner.class);
 		Log.i(Constants.vTag, "Total Spinners: "+vSpinner.size());
-		Log.i(Constants.vTag, "Selected Item Is: "+vSpinner.get(0).getSelectedItem().toString()+" at Index: "+vSpinner.get(0).getSelectedItemPosition()); 
-		Log.i(Constants.vTag, "Going to select Earth.");
 		solo.pressSpinnerItem(0, 2);
 		assertTrue("Spinner Value not selected successfully", solo.isSpinnerTextSelected(0, "Earth"));
 	}	
-
-	public void testSwitchView()
+	
+	/*
+	 * This test case will load screen with SwitchView
+	 * it will be implemented soon   
+	 * */
+	public void testActivityHavingSwitchView()
 	{
 		solo.clickOnButton("Switch");
 		//solo.assertCurrentActivity("Screen not loaded.",Constants.SWITCH_ACTIVITY_NAME);
 	}
-	
-	public void testRatingBar()
+
+	/*
+	 * This test case will load screen containing RatingBar 
+	 * count number of RatingBars
+	 * select rating and verify selection
+	 * */	
+	public void testActivityHavingRatingBar()
 	{
 		solo.clickOnButton("Rating Bar");
 		solo.assertCurrentActivity("Screen not loaded.",Constants.RATING_BAR_ACTIVITY);
@@ -268,7 +334,11 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 		assertTrue("Rating not successfull", (vRatingBar.get(0).getRating() == 4));
 	}
 	
-	public void testTabs()
+	/*
+	 * This test case will load screen containing Tabs 
+	 * Load each tab and verify its loaded
+	 * */	
+	public void testActivityHavingTabs()
 	{
 		solo.clickOnButton("Tabs");
 		solo.assertCurrentActivity("Screen not loaded.",Constants.TABS_ACTIVITY_NAME);

@@ -17,7 +17,7 @@ import com.jayway.android.robotium.solo.By;
 import com.jayway.android.robotium.solo.Condition;
 import com.jayway.android.robotium.solo.Solo;
 
-public class LoadApp extends ActivityInstrumentationTestCase2 implements Condition{
+public class MotileTest extends ActivityInstrumentationTestCase2 implements Condition{
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME ="com.motile.MainActivity";  
 	private static Class<?> launcherActivityClass;	
 	
@@ -31,7 +31,7 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 	     }	
 
 	@SuppressWarnings("unchecked")
-	public LoadApp() throws ClassNotFoundException
+	public MotileTest() throws ClassNotFoundException
 		{	
 		super(launcherActivityClass);
 		}
@@ -39,23 +39,16 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 	public static Solo solo;
 	
 	protected void setUp() throws Exception	{	
-	  Log.i(Constants.vTag, "Starting test case");
 	  solo = new Solo(getInstrumentation(), getActivity());		  
 	}	
 
 	public void testWebView() throws ClassNotFoundException
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Webview");
 		solo.assertCurrentActivity("Screen not loaded.", Constants.WEB_VIEW_ACTIVITY);
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
-		
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.takeScreenshot();		
-		if(solo.searchButton("Webview", true))
-			solo.clickOnButton("Webview");
-		//solo.sleep(3000);
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
+		assertTrue("Webview button available.", solo.searchButton("Webview", true));
+		solo.clickOnButton("Webview");
 		
 		//Use of - waitForWebElement(By by)
 		solo.waitForWebElement(By.id("Email"));
@@ -90,19 +83,14 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 			solo.takeScreenshot("LoggedIn", 50);
 		}
 		else Log.i(Constants.vTag, "Not able to Log in.");
-		solo.sleep(20000);
-		
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());	
+		solo.sleep(20000);		
 	}
 	
 	public void testCustomHTMLWebView() throws ClassNotFoundException
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Custom HTML");
 		solo.assertCurrentActivity("Screen not loaded.", Constants.CUSTOM_HTML_WEB_VIEW);
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
-		
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
+
 		//Use of waitForCondition(Condition condition, final int timeout) 		
 		solo.waitForCondition(this, Constants.vMinTimeout);
 		solo.clickOnButton("Custom HTML");
@@ -112,9 +100,7 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 		solo.enterTextInWebElement(By.id("Password2"), "123456");
 		solo.enterTextInWebElement(By.id("Name"), "naveed");
 		solo.enterTextInWebElement(By.id("Email"), "a@a.com");
-		solo.clickOnWebElement(By.id("Agreement"));
-		Log.i(Constants.vTag, "Filled form, going to click on Register");
-		
+		solo.clickOnWebElement(By.id("Agreement"));		
 		solo.clickOnWebElement(By.name("Register"));
 		Global.getAllWebElements();
 		
@@ -123,11 +109,8 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 	
 	public void testImageView()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Image View");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.", Constants.IMAGE_VIEW_ACTIVITY_NAME);			
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
 		Log.i(Constants.vTag, ": Total Images: "+Global.getNoOfImageViews()+" Total Image Buttons: "+Global.getNoOfImageButtons());		
 		
 		for(int i=1; i<Global.getNoOfImageButtons(); i++)
@@ -139,11 +122,8 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 	
 	public void testRadioButtons()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Radio Button");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.",Constants.RADIO_BUTTON_ACTIVITY_NAME);			
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
 		Log.i(Constants.vTag, ": Total Radio Buttons: "+Global.getNoOfRadioButtons()+" Total Radio Groups: "+Global.getNoOfRadioGroup());
 		for(int i=0; i<Global.getNoOfRadioButtons(); i++)
 		{
@@ -156,11 +136,8 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 
 	public void testCheckBoxes()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Check Box");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.",Constants.CHECK_BOX_ACTIVITY_NAME);
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());		
 		Log.i(Constants.vTag, "Total check Box: "+Global.getNoOfCheckbox());
 		
 		for(int i=0; i<Global.getNoOfCheckbox(); i++)
@@ -173,26 +150,19 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 	}
 
 	public void testListView()
-	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
-		solo.clickOnButton("ListView");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
+	{		
+		solo.clickOnButton("ListView");	
 		solo.assertCurrentActivity("Screen not loaded.",Constants.LIST_VIEW_ACTIVITY_NAME);			
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());		
 		Log.i(Constants.vTag, "Total Lists: "+Global.getNoOfListViews()+"");
 		Log.i(Constants.vTag, "Total rows in List: "+solo.getCurrentViews(ListView.class).get(0).getCount());
 		Log.i(Constants.vTag, "Total Visible TextViews in List: "+Global.getNoOfTextViewsInListView());		
-		assertTrue("Problem selecting value from ListView", selectValueFromList("November", solo.getCurrentViews(ListView.class).get(0)));
-		
+		assertTrue("Problem selecting value from ListView", selectValueFromList("November", solo.getCurrentViews(ListView.class).get(0)));		
 		}
 
 	public void testGridView()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("GridView");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.",Constants.GRID_VIEW_ACTIVITY_NAME);
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
 		
 		Log.i(Constants.vTag, "Total Grid views: "+Global.getNoOfGridViews());
 		Log.i(Constants.vTag, "Total Items in Grid: "+solo.getCurrentViews(GridView.class).get(0).getCount());
@@ -203,7 +173,7 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 		{
 			if(i%2==0)
 			{
-				Log.i(Constants.vTag, "Clicking on ImageId"+LoadApp.solo.getCurrentViews(GridView.class, LoadApp.solo.getCurrentViews(GridView.class).get(0)).get(i).getId());
+				Log.i(Constants.vTag, "Clicking on ImageId"+MotileTest.solo.getCurrentViews(GridView.class, MotileTest.solo.getCurrentViews(GridView.class).get(0)).get(i).getId());
 				solo.clickOnImage(i);
 			}
 		}
@@ -227,27 +197,20 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 
 	public void testCalenderView()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
-		solo.clickOnButton("CalenderView");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
+		solo.clickOnButton("CalenderView");	
 		//solo.assertCurrentActivity("Screen not loaded.",Constants.CALENDER_VIEW_ACTIVITY_NAME);
 	}
 	
 	public void testDateTimeView()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("DateTimeView");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		//solo.assertCurrentActivity("Screen not loaded.",Constants.DATE_TIME_VIEW_ACTIVITY_NAME);
 	}
 	
 	public void testTogleButton()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Toggle Button");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.",Constants.TOGGLE_BUTTON_ACTIVITY_NAME);	
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
 		
 		ArrayList<ToggleButton> vToggleButton = solo.getCurrentViews(ToggleButton.class);		
 		Log.i(Constants.vTag, "Total Toogle Buttons: "+Global.getNoOfToggleButtons());
@@ -262,11 +225,8 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 
 	public void testButton()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Small Button");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.",Constants.SMALL_BUTTON_ACTIVITY);
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
 		
 		ArrayList<Button> vSmallButton = solo.getCurrentViews(Button.class);
 		Log.i(Constants.vTag, "Total Buttons"+vSmallButton.size());
@@ -279,11 +239,8 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 
 	public void testSpinner()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Spinner");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.",Constants.SPINNER_ACTIVITY_NAME);
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
 		
 		ArrayList<Spinner> vSpinner = solo.getCurrentViews(Spinner.class);
 		Log.i(Constants.vTag, "Total Spinners: "+vSpinner.size());
@@ -295,19 +252,14 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 
 	public void testSwitchView()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Switch");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		//solo.assertCurrentActivity("Screen not loaded.",Constants.SWITCH_ACTIVITY_NAME);
 	}
 	
 	public void testRatingBar()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Rating Bar");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.",Constants.RATING_BAR_ACTIVITY);
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
 		
 		ArrayList<RatingBar> vRatingBar = solo.getCurrentViews(RatingBar.class);
 		Log.i(Constants.vTag, "Total Rating Bars "+vRatingBar.size());
@@ -318,11 +270,8 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 	
 	public void testTabs()
 	{
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.clickOnButton("Tabs");
-		Log.i(Constants.vTag, solo.getCurrentActivity().getLocalClassName().toString());
 		solo.assertCurrentActivity("Screen not loaded.",Constants.TABS_ACTIVITY_NAME);
-		Log.i(Constants.vTag, "Screen Title: "+solo.getText(0).getText().toString());
 		solo.clickOnText("Artists");
 		assertTrue("Artists tab not loaded.", solo.searchText("Hi TabOneContentsActivity", true));
 			
@@ -335,12 +284,10 @@ public class LoadApp extends ActivityInstrumentationTestCase2 implements Conditi
 	
 	public void tearDown() throws Exception	
 	{	
-		Log.i(Constants.vTag, "Closing test case");
 		solo.finishOpenedActivities();
 	}
 
 	public boolean isSatisfied() {
-		Log.i(Constants.vTag, "Verifying condition");
 		if(solo.searchButton("Custom HTML", true)) {Log.i(Constants.vTag, "Condition Passed"); return true;}
 		else {Log.i(Constants.vTag, "Condition Filed."); return false;}
 	}

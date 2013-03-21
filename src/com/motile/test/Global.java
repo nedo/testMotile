@@ -24,72 +24,72 @@ class Global {;
 	
 	static int getNoOfAllViews()
 	{
-		return LoadApp.solo.getCurrentViews().size();		
+		return MotileTest.solo.getCurrentViews().size();		
 	}
 
 	static int getNoOfImageViews()
 	{		 
-		return LoadApp.solo.getCurrentViews(ImageView.class).size();
+		return MotileTest.solo.getCurrentViews(ImageView.class).size();
 	}
 	
 	static int getNoOfImageButtons()
 	{
-		return LoadApp.solo.getCurrentViews(ImageButton.class).size();		
+		return MotileTest.solo.getCurrentViews(ImageButton.class).size();		
 	}
 	
 	static int getNoOfRadioButtons()
 	{
-		return LoadApp.solo.getCurrentViews(RadioButton.class).size();
+		return MotileTest.solo.getCurrentViews(RadioButton.class).size();
 	}
 	
 	static int getNoOfRadioGroup()
 	{
-		return LoadApp.solo.getCurrentViews(RadioGroup.class).size();
+		return MotileTest.solo.getCurrentViews(RadioGroup.class).size();
 	}
 	
 	static int getNoOfCheckbox()
 	{
-		return LoadApp.solo.getCurrentViews(CheckBox.class).size();
+		return MotileTest.solo.getCurrentViews(CheckBox.class).size();
 	}	
 
 	static int getNoOfListViews()
 	{
-		return LoadApp.solo.getCurrentViews(ListView.class).size();
+		return MotileTest.solo.getCurrentViews(ListView.class).size();
 	}
 	
 	static int getNoOfTextViewsInListView()
 	{
-		return LoadApp.solo.getCurrentViews(TextView.class, LoadApp.solo.getCurrentViews(ListView.class).get(0)).size(); 	
+		return MotileTest.solo.getCurrentViews(TextView.class, MotileTest.solo.getCurrentViews(ListView.class).get(0)).size(); 	
 	}
 	
 	static int getNoOfGridViews()
 	{
-		return LoadApp.solo.getCurrentViews(GridView.class).size();
+		return MotileTest.solo.getCurrentViews(GridView.class).size();
 	}
 	
 	static int getNoOfImageViewsInGridView()
 	{
-		return LoadApp.solo.getCurrentViews(GridView.class, LoadApp.solo.getCurrentViews(GridView.class).get(0)).size(); 	
+		return MotileTest.solo.getCurrentViews(GridView.class, MotileTest.solo.getCurrentViews(GridView.class).get(0)).size(); 	
 	}
 	
 	static int getNoOfToggleButtons()
 	{
-		return LoadApp.solo.getCurrentViews(ToggleButton.class).size();
+		return MotileTest.solo.getCurrentViews(ToggleButton.class).size();
 	}
 	
 	static int getNoOfButtons()
 	{
-		return LoadApp.solo.getCurrentViews(Button.class).size();
+		return MotileTest.solo.getCurrentViews(Button.class).size();
 	}
 	
 	static int getNoOfTextViews()
 	{
-		return LoadApp.solo.getCurrentViews(TextView.class).size();
+		return MotileTest.solo.getCurrentViews(TextView.class).size();
 	}
 	
 	static void getAllWebElements()
 	{
-		ArrayList<WebElement> vWebView =  LoadApp.solo.getCurrentWebElements();
+		ArrayList<WebElement> vWebView =  MotileTest.solo.getCurrentWebElements();
 			for(int i=0; i<vWebView.size(); i++)
 			{
 				Log.i(Constants.vTag, "==="+i+"===ID:"+vWebView.get(i).getId()+

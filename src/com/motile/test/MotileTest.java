@@ -54,43 +54,9 @@ public class MotileTest extends ActivityInstrumentationTestCase2 implements Cond
 		solo.takeScreenshot();		
 		assertTrue("Webview button available.", solo.searchButton("Webview", true));
 		solo.clickOnButton("Webview");
-		
-		//Use of - waitForWebElement(By by)
-		solo.waitForWebElement(By.id("Email"));
-		if(solo.searchText("Username", true))
-		{
-			Global.getAllWebElements();
-			//Use of - enterTextInWebElement(By by, String text)
-			solo.enterTextInWebElement(By.name("Email"), "qaperson49@hotmail");
-			//Use of - clearTextInWebElement(By by)
-			solo.clearTextInWebElement(By.name("Email"));
-			solo.enterTextInWebElement(By.name("Email"), "qaperson49@gmail.com");
-			//Use of - typeTextInWebElement(By by, String text)
-			solo.typeTextInWebElement(By.name("Passwd"), "Qaperson123");	
-			solo.clickOnWebElement(By.id("PersistentCookie"));
-			// Use of - getWebElement(By by, int index)
-			//WebElement vCheckbox = solo.getWebElement(By.id("PersistentCookie"), 0);
-			//Use of -clickOnWebElement(WebElement webElement)
-			//solo.clickOnWebElement(vCheckbox);
-			// Use of -clickOnWebElement(By by) 
-			solo.clickOnWebElement(By.id("signIn"), 1, true);
-			solo.sleep(20000);
-		}
-		else Log.i(Constants.vTag, "Sing in screen not loaded");
-
-		if(solo.searchText("qaperson49@gmail.com", 0, true, true))
-		{
-			Log.i(Constants.vTag, "Successful logged in.");
-			Global.getAllWebElements();
-			solo.clickOnText("Gmail Team");
-			solo.sleep(10000);
-			Global.getAllWebElements();
-			solo.takeScreenshot("LoggedIn", 50);
-		}
-		else Log.i(Constants.vTag, "Not able to Log in.");
-		solo.sleep(20000);		
+		solo.sleep(Global.vMinSleepTime);	
 	}
-	
+		
 	/*
 	 * This test case will load custom HTML WebView and 
 	 * try to fill a registration form
